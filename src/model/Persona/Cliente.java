@@ -2,18 +2,24 @@ package model.Persona;
 
 import model.Registrable;
 import model.ServicioTuristico.ServicioTuristico;
+import utils.TelefonoInvalido;
 
 public class Cliente extends Persona implements Registrable {
-    private ServicioTuristico servicio;
 
-    public Cliente(String nombre, Rut rut, Direccion direccion, String correo, String telefono, ServicioTuristico servicio) {
+    public Cliente(String nombre, Rut rut, Direccion direccion, String correo,
+                   String telefono) throws TelefonoInvalido {
         super(nombre, rut, direccion, correo, telefono);
-        this.servicio = servicio;
+
     }
 
 
     @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
     public String mostrarInformacion() {
-        return super.mostrarInformacion() + "\n" + servicio.mostrarInformacion();
+        return toString();
     }
 }

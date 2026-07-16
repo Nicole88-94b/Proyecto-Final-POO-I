@@ -3,19 +3,20 @@ package model.Persona;
 import model.Registrable;
 import utils.TelefonoInvalido;
 
-public class Persona implements Registrable {
+public abstract class Persona implements Registrable {
     private String nombre;
     private Rut rut;
     private Direccion direccion;
     private String correo;
     private String telefono;
 
-    public Persona(String nombre, Rut rut, Direccion direccion, String correo, String telefono) {
+    public Persona(String nombre, Rut rut, Direccion direccion, String correo, String telefono)
+            throws TelefonoInvalido {
         this.nombre = nombre;
         this.rut = rut;
         this.direccion = direccion;
         this.correo = correo;
-        this.telefono = telefono;
+        setTelefono(telefono);
     }
 
     public String getNombre() {
@@ -40,18 +41,19 @@ public class Persona implements Registrable {
     }
 
     public void setTelefono(String telefono) throws TelefonoInvalido {
-        if (telefono == null || telefono.isEmpty() || telefono.matches("\\d{11}[0-9]")) {
+        if (telefono == null || telefono.isEmpty() || !telefono.matches("\\+569\\d{8}")) {
             throw new TelefonoInvalido("Teléfono invalido, debe registrar el número como +56912345678");
         }
         this.telefono = telefono;
     }
 
     @Override
-    public String mostrarInformacion() {
+    public String toString() {
         return "Nombre: " + nombre +
-                rut.mostrarInformacion()
-                + direccion.mostrarInformacion() +
+                rut.toString()
+                + direccion.toString() +
                 "\nCorreo: " + correo +
                 "\nTeléfono: " + telefono;
     }
+
 }

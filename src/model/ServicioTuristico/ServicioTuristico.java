@@ -11,7 +11,7 @@ public class ServicioTuristico implements Registrable {
     private String nombre;
     private String destino;
     private double precio;
-    private double duracionHoras;
+    private double duracionDias;
     private GuiaTuristico guia;
 
 
@@ -22,15 +22,16 @@ public class ServicioTuristico implements Registrable {
      * @param nombre        nombre del recorrido o ruta
      * @param destino       lugar donde se realizarán las actividades
      * @param precio        valor total del servicio
-     * @param duracionHoras total de horas que durará el servicio
+     * @param duracionDias total de días que durará el servicio
      * @throws IllegalArgumentException si el precio o la duración no son mayores que cero
      */
-    public ServicioTuristico(String codigo, String nombre, String destino, double precio, double duracionHoras, GuiaTuristico guia) {
+    public ServicioTuristico(String codigo, String nombre, String destino, double precio, double duracionDias,
+                             GuiaTuristico guia) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.destino = destino;
         setPrecio(precio);
-        setDuracionHoras(duracionHoras);
+        setDuracionDias(duracionDias);
         this.guia = guia;
 
     }
@@ -77,32 +78,36 @@ public class ServicioTuristico implements Registrable {
     }
 
 
-    public double getDuracionHoras() {
-        return duracionHoras;
+    public double getDuracionDias() {
+        return duracionDias;
     }
 
     /**
      * Asigna la duración del servicio.
      *
-     * @param duracionHoras nueva duración en horas
+     * @param duracionDias nueva duración en días
      * @throws IllegalArgumentException si la duración no es mayor que cero
      */
-    public void setDuracionHoras(double duracionHoras) {
-        if (duracionHoras <= 0) {
-            throw new IllegalArgumentException("El número de horas debe ser mayor que cero.");
+    public void setDuracionDias(double duracionDias) {
+        if (duracionDias <= 0) {
+            throw new IllegalArgumentException("El número de días debe ser mayor que cero.");
         }
-        this.duracionHoras = duracionHoras;
+        this.duracionDias = duracionDias;
     }
 
-
     @Override
-    public String mostrarInformacion() {
+    public String toString() {
         return "Servicio Turístico programado: " +
                 "\nCódigo: " + codigo +
                 " \nNombre: " + nombre +
                 " \nDestino: " + destino +
                 " \nPrecio: $" + precio +
-                " \nDuración en horas: " + duracionHoras
+                " \nDuración en días: " + duracionDias
                 + "\nGuía responsable: " + guia.getCodigoGuia() + " " + guia.getNombre() + ".";
+    }
+
+    @Override
+    public String mostrarInformacion() {
+        return toString();
     }
 }

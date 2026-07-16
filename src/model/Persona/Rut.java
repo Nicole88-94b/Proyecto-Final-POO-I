@@ -1,9 +1,8 @@
 package model.Persona;
 
-import model.Registrable;
 import utils.RutInvalido;
 
-public class Rut implements Registrable {
+public class Rut  {
     private String numeroRut;
 
     public Rut(String numeroRut) throws RutInvalido {
@@ -28,7 +27,8 @@ public class Rut implements Registrable {
     }
 
     @Override
-    public String mostrarInformacion() {
-        return "\nRut: ";
+    public String toString() {
+        return "\nRut: " + numeroRut;
     }
+
 }

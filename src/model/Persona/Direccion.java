@@ -1,8 +1,7 @@
 package model.Persona;
 
-import model.Registrable;
 
-public class Direccion implements Registrable {
+public class Direccion  {
     private String calle;
     private int numero;
     private String region;
@@ -25,9 +24,9 @@ public class Direccion implements Registrable {
         return numero;
     }
 
-    public void setNumero(int numero) throws NumberFormatException {
+    public void setNumero(int numero) throws IllegalArgumentException {
         if (numero <=0 ) {
-            throw new NumberFormatException("El número de la dirección no puede ser negativo");
+            throw new IllegalArgumentException("El número de la dirección no puede ser cero ni negativo");
         }
         this.numero = numero;
     }
@@ -41,7 +40,8 @@ public class Direccion implements Registrable {
     }
 
     @Override
-    public String mostrarInformacion() {
-        return "\nDirección: " + getCalle() + ", #" + getNumero() + ", " + getRegion() + ".";
+    public String toString() {
+        return "\nDirección: " + calle + ", #" + numero + ", " + region + ".";
     }
+
 }

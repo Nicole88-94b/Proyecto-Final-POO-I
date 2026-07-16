@@ -16,13 +16,13 @@ public class RutaGastronomica extends ServicioTuristico implements Registrable {
      * @param nombre          nombre del servicio turístico
      * @param destino         destino del recorrido
      * @param precio          precio por persona
-     * @param duracionHoras   número de horas que dura el tour
+     * @param duracionDias   número de días que dura el tour
      * @param guia            guía responsable del recorrido
      * @param numeroDeParadas número de paradas que tendrá el tour
      * @throws IllegalArgumentException si el precio, la duración o el número de paradas no son mayores que cero
      */
-    public RutaGastronomica(String codigo, String nombre, String destino, double precio, double duracionHoras, GuiaTuristico guia, int numeroDeParadas) {
-        super(codigo, nombre, destino, precio, duracionHoras, guia);
+    public RutaGastronomica(String codigo, String nombre, String destino, double precio, double duracionDias, GuiaTuristico guia, int numeroDeParadas) {
+        super(codigo, nombre, destino, precio, duracionDias, guia);
         setNumeroDeParadas(numeroDeParadas);
     }
 
@@ -43,10 +43,15 @@ public class RutaGastronomica extends ServicioTuristico implements Registrable {
         }
         this.numeroDeParadas = numeroDeParadas;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nNúmero de paradas planificadas: " + numeroDeParadas + ".";
+    }
+
     @Override
     public String mostrarInformacion() {
-        return super.mostrarInformacion() +
-                "\nNúmero de paradas planificadas: " + numeroDeParadas + ".";
+        return toString();
     }
 
 }

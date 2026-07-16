@@ -12,13 +12,13 @@ public class ExcursionCultural extends ServicioTuristico implements Registrable 
      * @param nombre        nombre del servicio turístico
      * @param destino       destino del recorrido
      * @param precio        precio por persona
-     * @param duracionHoras número de horas que dura el tour
+     * @param duracionDias número de días que dura el tour
      * @param guia          guía responsable del recorrido
      * @param lugarTuristico lugar en donde se llevará a cabo el tour
      * @throws IllegalArgumentException si el precio o la duración no son mayores que cero
      */
-    public ExcursionCultural(String codigo, String nombre, String destino, double precio, double duracionHoras, GuiaTuristico guia, String lugarTuristico) {
-        super(codigo, nombre, destino, precio, duracionHoras, guia);
+    public ExcursionCultural(String codigo, String nombre, String destino, double precio, double duracionDias, GuiaTuristico guia, String lugarTuristico) {
+        super(codigo, nombre, destino, precio, duracionDias, guia);
         this.lugarTuristico = lugarTuristico;
     }
 
@@ -31,9 +31,13 @@ public class ExcursionCultural extends ServicioTuristico implements Registrable 
     }
 
     @Override
+    public String toString() {
+        return super.toString() + "\nLugar del tour: " + lugarTuristico + "." ;
+    }
+
+    @Override
     public String mostrarInformacion() {
-        return super.mostrarInformacion() +
-                "\nLugar del tour: " + lugarTuristico + ".";
+        return toString();
     }
 
 }
