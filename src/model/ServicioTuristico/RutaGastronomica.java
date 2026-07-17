@@ -27,6 +27,11 @@ public class RutaGastronomica extends ServicioTuristico implements Registrable {
     }
 
 
+    /**
+     * Obtiene el número de paradas de la ruta.
+     *
+     * @return cantidad de paradas planificadas
+     */
     public int getNumeroDeParadas() {
         return numeroDeParadas;
     }
@@ -44,11 +49,21 @@ public class RutaGastronomica extends ServicioTuristico implements Registrable {
         this.numeroDeParadas = numeroDeParadas;
     }
 
+    /**
+     * Devuelve los datos comunes y el número de paradas.
+     *
+     * @return representación textual de la ruta
+     */
     @Override
     public String toString() {
         return super.toString() + "\nNúmero de paradas planificadas: " + numeroDeParadas + ".";
     }
 
+    /**
+     * Genera la información registrable de la ruta.
+     *
+     * @return datos completos de la ruta gastronómica
+     */
     @Override
     public String mostrarInformacion() {
         return toString();

@@ -23,6 +23,7 @@ public class ServicioTuristico implements Registrable {
      * @param destino       lugar donde se realizarán las actividades
      * @param precio        valor total del servicio
      * @param duracionDias total de días que durará el servicio
+     * @param guia guía responsable del servicio
      * @throws IllegalArgumentException si el precio o la duración no son mayores que cero
      */
     public ServicioTuristico(String codigo, String nombre, String destino, double precio, double duracionDias,
@@ -36,30 +37,65 @@ public class ServicioTuristico implements Registrable {
 
     }
 
+    /**
+     * Obtiene el código del servicio.
+     *
+     * @return código del servicio
+     */
     public String getCodigo() {
         return codigo;
     }
 
+    /**
+     * Asigna el código del servicio.
+     *
+     * @param codigo nuevo código
+     */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
+    /**
+     * Obtiene el nombre del servicio.
+     *
+     * @return nombre del tour
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Asigna el nombre del servicio.
+     *
+     * @param nombre nuevo nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Obtiene el destino del servicio.
+     *
+     * @return destino del tour
+     */
     public String getDestino() {
         return destino;
     }
 
+    /**
+     * Asigna el destino del servicio.
+     *
+     * @param destino nuevo destino
+     */
     public void setDestino(String destino) {
         this.destino = destino;
     }
 
+    /**
+     * Obtiene el precio del servicio.
+     *
+     * @return precio registrado
+     */
     public double getPrecio() {
         return precio;
     }
@@ -78,6 +114,11 @@ public class ServicioTuristico implements Registrable {
     }
 
 
+    /**
+     * Obtiene la duración del servicio.
+     *
+     * @return duración en días
+     */
     public double getDuracionDias() {
         return duracionDias;
     }
@@ -95,6 +136,11 @@ public class ServicioTuristico implements Registrable {
         this.duracionDias = duracionDias;
     }
 
+    /**
+     * Devuelve los datos comunes del servicio y del guía responsable.
+     *
+     * @return representación textual del servicio
+     */
     @Override
     public String toString() {
         return "Servicio Turístico programado: " +
@@ -106,6 +152,11 @@ public class ServicioTuristico implements Registrable {
                 + "\nGuía responsable: " + guia.getCodigoGuia() + " " + guia.getNombre() + ".";
     }
 
+    /**
+     * Genera la información registrable del servicio.
+     *
+     * @return datos completos del servicio
+     */
     @Override
     public String mostrarInformacion() {
         return toString();

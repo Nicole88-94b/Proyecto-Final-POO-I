@@ -9,32 +9,49 @@ import model.ServicioTuristico.ServicioTuristico;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Carga, valida, crea y consulta los servicios turísticos de la agencia.
+ */
 public class GestorServicios {
-private List<ServicioTuristico> servicios;
+    private List<ServicioTuristico> servicios;
 
-public GestorServicios() {
-    servicios = new ArrayList<>();
-}
+      public GestorServicios() {
+        servicios = new ArrayList<>();
+    }
 
-    public List<ServicioTuristico> getServicios() {
+      public List<ServicioTuristico> getServicios() {
         return servicios;
     }
 
 
-   public void cargarTours (List<String> lineas, GestorPersonas gestorPersonas) {
-    int numeroLinea= 1;
-       for (String linea : lineas) {
-           ServicioTuristico servicio = procesarLineas(linea, numeroLinea, gestorPersonas);
+    /**
+     * Procesa las líneas de tours y agrega a la colección los servicios válidos.
+     *
+     * @param lineas líneas obtenidas desde el archivo de tours
+     * @param gestorPersonas gestor utilizado para localizar al guía asignado
+     */
+    public void cargarTours(List<String> lineas, GestorPersonas gestorPersonas) {
+        int numeroLinea = 1;
+        for (String linea : lineas) {
+            ServicioTuristico servicio = procesarLineas(linea, numeroLinea, gestorPersonas);
 
-           if (servicio != null) {
-               servicios.add(servicio);
-           }
+            if (servicio != null) {
+                servicios.add(servicio);
+            }
 
-           numeroLinea++;
-       }
+            numeroLinea++;
+        }
 
     }
 
+    /**
+     * Valida y transforma una línea del archivo en un servicio turístico.
+     *
+     * @param linea línea con los ocho campos del tour
+     * @param numerolinea posición de la línea dentro del archivo
+     * @param gestorPersonas gestor utilizado para buscar al guía por código
+     * @return servicio creado o nulo cuando la línea no es válida
+     */
     private ServicioTuristico procesarLineas(String linea, int numerolinea, GestorPersonas gestorPersonas) {
         String datos[] = linea.split(";", -1);
         if (datos.length != 8) {
@@ -73,11 +90,25 @@ public GestorServicios() {
 
     }
 
+    /**
+     * Comprueba que los campos obligatorios de un tour tengan contenido.
+     *
+     * @param codigo código del servicio
+     * @param nombre nombre del servicio
+     * @param destino destino del tour
+     * @param precioTexto precio antes de su conversión
+     * @param duracionDiasTexto duración antes de su conversión
+     * @param codigoGuia código del guía asignado
+     * @param nombreGuia nombre informado para el guía
+     * @param atributoParticularTour dato propio del subtipo de tour
+     * @param numeroLinea posición de la línea dentro del archivo
+     * @return verdadero si existe algún campo vacío; de lo contrario, devuelve falso
+     */
     private boolean verificarCampoVacios(String codigo, String nombre, String destino, String precioTexto,
                                          String duracionDiasTexto, String codigoGuia, String nombreGuia,
                                          String atributoParticularTour, int numeroLinea) {
         if (codigo.isEmpty() || nombre.isEmpty() || destino.isEmpty() || precioTexto.isEmpty() ||
-                duracionDiasTexto.isEmpty() ||  codigoGuia.isEmpty() || nombreGuia.isEmpty() ||
+                duracionDiasTexto.isEmpty() || codigoGuia.isEmpty() || nombreGuia.isEmpty() ||
                 atributoParticularTour.isEmpty()) {
             System.out.println("Línea " + numeroLinea + " omitida: contiene campos vacíos.");
             return true;
@@ -85,40 +116,74 @@ public GestorServicios() {
         return false;
     }
 
-public double convertirPrecio(String precioTexto) {
-    double precio = Double.parseDouble(precioTexto);
-    if (precio <= 0) {
-        throw new IllegalArgumentException("El precio debe ser mayor que cero.");
+    /**
+     * Convierte y valida el precio de un servicio.
+     *
+     * @param precioTexto precio en formato de texto
+     * @return precio convertido a número
+     * @throws IllegalArgumentException si el valor no es numérico o no es mayor que cero
+     */
+    public double convertirPrecio(String precioTexto) {
+        double precio = Double.parseDouble(precioTexto);
+        if (precio <= 0) {
+            throw new IllegalArgumentException("El precio debe ser mayor que cero.");
+        }
+        return precio;
     }
-    return precio;
-}
 
-public double convertirDias(String duracionDiasTexto) {
-    double duracion = Double.parseDouble(duracionDiasTexto);
-    if (duracion <= 0) {
-        throw new IllegalArgumentException("La duración de días debe ser mayor que cero.");
+    /**
+     * Convierte y valida la duración de un servicio.
+     *
+     * @param duracionDiasTexto duración en formato de texto
+     * @return duración convertida a número de días
+     * @throws IllegalArgumentException si el valor no es numérico o no es mayor que cero
+     */
+    public double convertirDias(String duracionDiasTexto) {
+        double duracion = Double.parseDouble(duracionDiasTexto);
+        if (duracion <= 0) {
+            throw new IllegalArgumentException("La duración de días debe ser mayor que cero.");
+        }
+        return duracion;
     }
-    return duracion;
-}
 
-public ServicioTuristico crearServicio(String codigo, String nombre, String destino, double precio, double duracionDias,
-                                       GuiaTuristico guia, String atributoParticularTour) {
-    switch (codigo) {
-        case "01GA":
-            int numeroParadas = convertirAtributo(atributoParticularTour);
-            return new RutaGastronomica(codigo, nombre, destino, precio, duracionDias, guia, numeroParadas);
+    /**
+     * Crea el subtipo de servicio determinado por su código.
+     *
+     * @param codigo código que identifica el subtipo de servicio
+     * @param nombre nombre del servicio
+     * @param destino destino del tour
+     * @param precio precio del servicio
+     * @param duracionDias duración del servicio en días
+     * @param guia guía responsable
+     * @param atributoParticularTour dato propio del subtipo
+     * @return servicio turístico del subtipo correspondiente
+     * @throws IllegalArgumentException si el código o el atributo particular no son válidos
+     */
+    public ServicioTuristico crearServicio(String codigo, String nombre, String destino, double precio, double duracionDias,
+                                           GuiaTuristico guia, String atributoParticularTour) {
+        switch (codigo) {
+            case "01GA":
+                int numeroParadas = convertirAtributo(atributoParticularTour);
+                return new RutaGastronomica(codigo, nombre, destino, precio, duracionDias, guia, numeroParadas);
 
-        case "02LA":
-            return new PaseoLacustre(codigo, nombre, destino, precio, duracionDias, guia, atributoParticularTour);
+            case "02LA":
+                return new PaseoLacustre(codigo, nombre, destino, precio, duracionDias, guia, atributoParticularTour);
 
-        case "03CU":
-            return new ExcursionCultural(codigo, nombre, destino, precio, duracionDias, guia, atributoParticularTour);
+            case "03CU":
+                return new ExcursionCultural(codigo, nombre, destino, precio, duracionDias, guia, atributoParticularTour);
 
-        default:
-            throw new IllegalArgumentException("Código desconocido.");
+            default:
+                throw new IllegalArgumentException("Código desconocido.");
+        }
     }
-}
 
+    /**
+     * Convierte a entero el número de paradas de una ruta gastronómica.
+     *
+     * @param atributoParticularTour número de paradas en formato de texto
+     * @return número de paradas convertido a entero
+     * @throws IllegalArgumentException si el valor no es un entero
+     */
     private int convertirAtributo(String atributoParticularTour) {
         try {
             return Integer.parseInt(atributoParticularTour);
@@ -127,5 +192,19 @@ public ServicioTuristico crearServicio(String codigo, String nombre, String dest
         }
     }
 
+    /**
+     * Busca un servicio por su código, sin distinguir mayúsculas y minúsculas.
+     *
+     * @param codigoBuscado código del servicio buscado
+     * @return servicio encontrado o nulo si no existe
+     */
+    public ServicioTuristico buscarServicioPorCodigo(String codigoBuscado) {
+        for (ServicioTuristico servicio : servicios) {
+            if (servicio.getCodigo().equalsIgnoreCase(codigoBuscado)) {
+                return servicio;
+            }
+        }
+        return null;
+    }
 
 }

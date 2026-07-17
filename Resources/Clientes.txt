@@ -1,0 +1,1 @@
+CLIENTE;Valentina Muñoz;98765432-1;Los Coihues;145;Los Lagos;valentina@email.cl;+56987654321

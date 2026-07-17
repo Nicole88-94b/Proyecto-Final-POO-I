@@ -3,6 +3,9 @@ package model.ServicioTuristico;
 import model.Persona.GuiaTuristico;
 import model.Registrable;
 
+/**
+ * Representa una excursión cultural asociada a un lugar turístico.
+ */
 public class ExcursionCultural extends ServicioTuristico implements Registrable {
     private String lugarTuristico;
     /**
@@ -22,19 +25,39 @@ public class ExcursionCultural extends ServicioTuristico implements Registrable 
         this.lugarTuristico = lugarTuristico;
     }
 
+    /**
+     * Obtiene el lugar turístico de la excursión.
+     *
+     * @return lugar visitado durante el tour
+     */
     public String getLugarTuristico() {
         return lugarTuristico;
     }
 
+    /**
+     * Asigna el lugar turístico de la excursión.
+     *
+     * @param lugarTuristico nuevo lugar del tour
+     */
     public void setLugarTuristico(String lugarTuristico) {
         this.lugarTuristico = lugarTuristico;
     }
 
+    /**
+     * Devuelve los datos comunes y el lugar turístico.
+     *
+     * @return representación textual de la excursión
+     */
     @Override
     public String toString() {
         return super.toString() + "\nLugar del tour: " + lugarTuristico + "." ;
     }
 
+    /**
+     * Genera la información registrable de la excursión.
+     *
+     * @return datos completos de la excursión cultural
+     */
     @Override
     public String mostrarInformacion() {
         return toString();

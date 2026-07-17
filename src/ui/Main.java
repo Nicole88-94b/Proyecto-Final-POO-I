@@ -3,41 +3,43 @@ package ui;
 import data.GestorArchivos;
 import data.GestorPersonas;
 import data.GestorServicios;
-import model.Persona.Direccion;
+
+import model.Persona.Cliente;
 import model.Persona.GuiaTuristico;
-import model.Persona.Rut;
+
 import model.ServicioTuristico.ServicioTuristico;
-import utils.RutInvalido;
-import utils.TelefonoInvalido;
 
 import java.util.List;
 
+/**
+ * Punto de entrada que demuestra la carga y consulta de los datos de la agencia.
+ */
 public class Main {
+    /**
+     * Carga clientes, guías, colaboradores y tours desde los archivos de recursos,
+     * realiza búsquedas de ejemplo y muestra los resultados por consola.
+     *
+     * @param args argumentos de línea de comandos; no se utilizan
+     */
     public static void main(String[] args) {
+
+        GestorArchivos gestorArchivos = new GestorArchivos();
         GestorPersonas gestorPersonas = new GestorPersonas();
-        try {
-            Rut rutGuia = new Rut("12345678-9");
-            Direccion direccionGuia =
-                    new Direccion("Los Alerces", 125, "Los Lagos");
+        List<String> lineasClientes = gestorArchivos.listaClientes();
+        gestorPersonas.cargarClientes(lineasClientes);
+        Cliente clienteEncontrado = gestorPersonas.buscarClientePorRut("98765432-1");
 
-            GuiaTuristico guia = new GuiaTuristico(
-                    "Camila Soto",
-                    rutGuia,
-                    direccionGuia,
-                    "camila@llanquihuetour.cl",
-                    "+56912345678",
-                    "GUI-001"
-            );
-
-            gestorPersonas.agregarPersona(guia);
-
-            System.out.println(guia);
-
-        } catch (RutInvalido | TelefonoInvalido e) {
-            System.out.println("No se pudo crear el guía: " + e.getMessage());
+        if (clienteEncontrado != null) {
+            System.out.println("Cliente encontrado:");
+            System.out.println(clienteEncontrado);
+        } else {
+            System.out.println("Cliente no encontrado.");
         }
-        GuiaTuristico guiaEncontrado =
-                gestorPersonas.buscarGuiaPorCodigo("GUI-001");
+
+        List<String> lineasPersonas = gestorArchivos.listaGuiasColaboradores();
+        gestorPersonas.cargarPersonas(lineasPersonas);
+
+        GuiaTuristico guiaEncontrado = gestorPersonas.buscarGuiaPorCodigo("GUI-001");
 
         if (guiaEncontrado != null) {
             System.out.println("Guía encontrado:");
@@ -45,12 +47,12 @@ public class Main {
         } else {
             System.out.println("No se encontró el guía.");
         }
-        GestorArchivos gestorArchivos = new GestorArchivos();
+
+
         List<String> lineasTours = gestorArchivos.listaTours();
 
         GestorServicios gestorServicios = new GestorServicios();
         gestorServicios.cargarTours(lineasTours, gestorPersonas);
-
 
         for (ServicioTuristico servicio : gestorServicios.getServicios()) {
             System.out.println(servicio.mostrarInformacion());

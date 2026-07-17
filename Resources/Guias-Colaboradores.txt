@@ -1,0 +1,2 @@
+GUIA;Camila Soto;12345678-9;Los Alerces;125;Los Lagos;camila@llanquihuetour.cl;+56912345678;GUI-001
+COLABORADOR;Sabores del Sur;12345678-9;Los Aromos;320;Los Lagos;contacto@sabores.cl;+56987654321;Servicio gastronómico
