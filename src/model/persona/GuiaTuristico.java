@@ -1,4 +1,4 @@
-package model.Persona;
+package model.persona;
 
 import model.Registrable;
 import utils.TelefonoInvalido;

@@ -1,10 +1,10 @@
 package data;
 
-import model.Persona.GuiaTuristico;
-import model.ServicioTuristico.ExcursionCultural;
-import model.ServicioTuristico.PaseoLacustre;
-import model.ServicioTuristico.RutaGastronomica;
-import model.ServicioTuristico.ServicioTuristico;
+import model.persona.GuiaTuristico;
+import model.servicio.ExcursionCultural;
+import model.servicio.PaseoLacustre;
+import model.servicio.RutaGastronomica;
+import model.servicio.ServicioTuristico;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,13 +2,17 @@ package ui;
 
 import data.GestorArchivos;
 import data.GestorPersonas;
+import data.GestorReservas;
 import data.GestorServicios;
 
-import model.Persona.Cliente;
-import model.Persona.GuiaTuristico;
+import model.Registrable;
+import model.Reserva;
+import model.persona.Cliente;
+import model.persona.GuiaTuristico;
 
-import model.ServicioTuristico.ServicioTuristico;
+import model.servicio.ServicioTuristico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,10 +48,11 @@ public class Main {
         if (guiaEncontrado != null) {
             System.out.println("Guía encontrado:");
             System.out.println(guiaEncontrado);
+            System.out.println("--------------------");
         } else {
             System.out.println("No se encontró el guía.");
+            System.out.println("--------------------");
         }
-
 
         List<String> lineasTours = gestorArchivos.listaTours();
 
@@ -57,6 +62,35 @@ public class Main {
         for (ServicioTuristico servicio : gestorServicios.getServicios()) {
             System.out.println(servicio.mostrarInformacion());
         }
+
+        ServicioTuristico servicioEncontrado = gestorServicios.buscarServicioPorCodigo("01GA");
+
+        GestorReservas gestorReservas = new GestorReservas();
+
+        if (clienteEncontrado != null && servicioEncontrado != null) {
+            gestorReservas.agregarReserva("RES-001", clienteEncontrado, servicioEncontrado, 2,
+                    "CONFIRMADA");
+
+            Reserva reservaEncontrada = gestorReservas.buscarReservaPorCodigo("RES-001");
+
+            System.out.println("\nReserva encontrada:");
+            System.out.println(reservaEncontrada.mostrarInformacion());
+            System.out.println("--------------------");
+        }
+
+        List<Registrable> registros = new ArrayList<>();
+
+        registros.addAll(gestorPersonas.getPersonas());
+        registros.addAll(gestorServicios.getServicios());
+        registros.addAll(gestorReservas.getReservas().values());
+
+        System.out.println("\nListado polimórfico:");
+
+        for (Registrable registro : registros) {
+            System.out.println(registro.mostrarInformacion());
+            System.out.println("--------------------");
+        }
+
     }
 
 

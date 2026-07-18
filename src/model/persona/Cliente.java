@@ -1,4 +1,4 @@
-package model.Persona;
+package model.persona;
 
 import model.Registrable;
 import utils.TelefonoInvalido;
@@ -32,7 +32,7 @@ public class Cliente extends Persona implements Registrable {
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Cliente: \n" + super.toString();
     }
 
     /**

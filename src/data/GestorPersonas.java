@@ -1,6 +1,6 @@
 package data;
 
-import model.Persona.*;
+import model.persona.*;
 import utils.RutInvalido;
 import utils.TelefonoInvalido;
 

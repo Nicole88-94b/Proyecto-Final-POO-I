@@ -1,7 +1,7 @@
 package model;
 
-import model.Persona.Cliente;
-import model.ServicioTuristico.ServicioTuristico;
+import model.persona.Cliente;
+import model.servicio.ServicioTuristico;
 
 /**
  * Representa la reserva de un servicio turístico realizada por un cliente.

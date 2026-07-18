@@ -1,4 +1,4 @@
-package model.Persona;
+package model.persona;
 
 import model.Registrable;
 import utils.TelefonoInvalido;
@@ -41,7 +41,7 @@ public class ColaboradorExterno extends Persona implements Registrable {
      */
     @Override
     public String toString() {
-        return super.toString() +
+        return "Colaborador externo: \n" +super.toString() +
                 "\nTipo de colaboración: " + tipoColaboracion;
     }
 

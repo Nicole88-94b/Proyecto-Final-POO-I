@@ -1,6 +1,6 @@
-package model.ServicioTuristico;
+package model.servicio;
 
-import model.Persona.GuiaTuristico;
+import model.persona.GuiaTuristico;
 import model.Registrable;
 
 /**
@@ -143,7 +143,7 @@ public class ServicioTuristico implements Registrable {
      */
     @Override
     public String toString() {
-        return "Servicio Turístico programado: " +
+        return "\nServicio Turístico programado: " +
                 "\nCódigo: " + codigo +
                 " \nNombre: " + nombre +
                 " \nDestino: " + destino +

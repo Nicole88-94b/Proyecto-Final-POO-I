@@ -1,6 +1,6 @@
-package model.ServicioTuristico;
+package model.servicio;
 
-import model.Persona.GuiaTuristico;
+import model.persona.GuiaTuristico;
 import model.Registrable;
 
 /**

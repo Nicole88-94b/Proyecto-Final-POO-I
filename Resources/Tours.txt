@@ -1,1 +1,3 @@
 01GA;Ruta Sabores del Sur;Frutillar;25000;2;GUI-001;Camila Soto;6
+02LA;Navegación Lago Llanquihue;Puerto Varas;30000;1;GUI-001;Camila Soto;Catamarán
+03CU;Patrimonio de Frutillar;Frutillar;18000;1;GUI-001;Camila Soto;Museo Colonial Alemán
